@@ -1,0 +1,96 @@
+body{
+    background-color: #000;
+}
+#landing-header{
+    z-index:1;
+        /* We set the z-index to 1 so all of the elements inside the landing-header div will be in front of the background images
+        in order to use z-index, we have to change position to something else from static. static is default one. */
+    position: relative;
+    text-align: center;
+        /* this give us a center horizontally. */
+    padding-top: 40vh;
+        /* to center item vertically in page, the easiest way is to use viewheight(vh). */
+}
+
+#landing-header h1 {
+    color: #fff;
+}
+
+.slideshow { 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+        /* so that the background images are behind other content that has a z-index of 1 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .slideshow li { 
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+        /* this allows the images to take up the entire page. */
+    background-position: 50% 50%;
+        /* this will center images, perfectly in the center */
+    background-repeat: no-repeat;
+        /* this will make image not to be repeated vertically or horizontally. */
+    opacity: 0;
+        /* because we want our images to start fadedout */
+    z-index: 0;
+
+    animation: imageAnimation 50s linear infinite; 
+        /* this will allow us to fade images in and out. so the name of animation is imageAnimation and it is what we called the animation that 
+        we created. and we tell the animation to last for 50 seconds and make sure it's linear. which means telling the animation to be the
+        same speed from begining to end. and we tell the animation to loop infinitely that way slideshow never ends. */
+  }
+
+  .slideshow li:nth-child(1) { 
+    background-image: url(/images/4.jpg) 
+  }
+  .slideshow li:nth-child(2) { 
+    background-image: url(/images/2.jpg);
+    animation-delay: 10s; 
+  }
+  .slideshow li:nth-child(3) { 
+    background-image: url(/images/3.jpg);
+    animation-delay: 20s; 
+  }
+  .slideshow li:nth-child(4) { 
+    background-image: url(/images/1.jpg);
+    animation-delay: 30s; 
+  }
+  .slideshow li:nth-child(5) { 
+    background-image: url(/images/5.jpg);
+    animation-delay: 40s; 
+  }
+
+  /* We are indicating what we will want to have happened in various keyframes within the animation */
+  @keyframes imageAnimation { 
+    0% { 
+      opacity: 0; 
+      animation-timing-function: ease-in;
+    }
+    10% {
+      opacity: 1;
+      animation-timing-function: ease-out;
+    }
+    20% {
+      opacity: 1
+    }
+    30% {
+      opacity: 0
+    }
+  }
+
+  /* Older browser support - .no-cssanimations class added by modernizr */
+  
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}
