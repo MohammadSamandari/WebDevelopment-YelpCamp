@@ -2,10 +2,10 @@ var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
-    flash=require("connect-flash"),
+    flash = require("connect-flash"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
-    methodOverride=require("method-override"),
+    methodOverride = require("method-override"),
     Campground = require("./models/campground"),
     Comment = require("./models/comment"),
     User = require("./models/user"),
@@ -16,7 +16,8 @@ var commentRoutes = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/yelp_camp_v12");
+// mongoose.connect("mongodb://localhost/yelp_camp_v12");
+mongoose.connect("mongodb://lord:passw0rd@ds127300.mlab.com:27300/lord_yelp_camp");
 //seedDB();    //seed the database
 
 app.set("view engine", "ejs");
@@ -44,8 +45,8 @@ app.use(function (req, res, next) {
     // we are going to pass that re.user to every single template
     // What ever we put in res.locals, is what's available inside of our template.
     res.locals.currentUser = req.user;
-    res.locals.error=req.flash("error");
-    res.locals.success=req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     // we need to move on to next code
     next();
 });
@@ -57,7 +58,9 @@ app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
+// we added this variable so that it can be run both locally and on the server as well.
+var port = process.env.PORT || 3000;
 
-app.listen(process.env.PORT,process.env.IP, function () {
+app.listen(port, process.env.IP, function () {
     console.log("YelpCamp Server Has Started!");
 });
