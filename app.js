@@ -16,8 +16,10 @@ var commentRoutes = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
 
-// mongoose.connect("mongodb://localhost/yelp_camp_v12");
-mongoose.connect("mongodb://lord:passw0rd@ds127300.mlab.com:27300/lord_yelp_camp");
+// we Set the Enviroment Variable in the command line with set comman.
+mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect("mongodb://lord:passw0rd@ds127300.mlab.com:27300/lord_yelp_camp");
+
 //seedDB();    //seed the database
 
 app.set("view engine", "ejs");
